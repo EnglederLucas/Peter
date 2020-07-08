@@ -6,13 +6,20 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/bootstrap": "^4.5.0",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.48",
     "@types/react": "^16.9.41",
+    "@types/react-bootstrap": "^1.0.1",
     "@types/react-dom": "^16.9.8",
+    "bootstrap": "^4.5.0",
+    "electron": "^9.1.0",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.1.0",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
     "react-scripts": "3.4.1",
+    "react-tooltip": "^4.2.7",
     "typescript": "^3.7.5"
   },
   "scripts": {
@@ -35,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/electron": "^1.6.10"
   }
 }

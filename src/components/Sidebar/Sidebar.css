@@ -1,0 +1,124 @@
+.sidebar {
+    background-color: #f4f4f4;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    width: 75px;
+    overflow: none;
+    z-index: 2;
+    -webkit-box-shadow: 10px 10px 20px -16px rgba(0, 0, 0, 0.39);
+    -moz-box-shadow: 10px 10px 20px -16px rgba(0, 0, 0, 0.39);
+    box-shadow: 10px 10px 20px -16px rgba(0, 0, 0, 0.39);
+}
+
+.service-buttons {
+    height: fit-content;
+}
+
+.button-border {
+    position: absolute;
+    z-index: 0;
+    left: 0;
+    top: 0;
+    height: 0px;
+    width: 6px;
+}
+
+.selected {
+    /* background-color: #e2e2e296; */
+    background-color: #a0bcd449;
+}
+.button-border-selected {
+    height: 75px;
+    transition: height 0.5s ease-in-out;
+    background-color: #0275d8;
+}
+
+.square-button {
+    position: relative;
+    height: 75px;
+    width: 75px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.square-button > p {
+    margin-top: 10px;
+}
+
+.square-button > img {
+    margin: 0 auto;
+    height: 50%;
+    width: 50%;
+}
+
+.service-buttons > .square-button > span {
+    display: inline-block;
+}
+
+#cog:hover {
+    -webkit-animation: infinite-spinning 3s infinite; /* Safari 4+ */
+    -moz-animation: infinite-spinning 3s infinite; /* Fx 5+ */
+    -o-animation: infinite-spinning 3s infinite; /* Opera 12+ */
+    animation: infinite-spinning 3s infinite; /* IE 10+, Fx 29+ */
+    animation-direction: alternate;
+}
+
+#bell:hover {
+    -webkit-animation: cling 4s infinite; /* Safari 4+ */
+    -moz-animation: cling 4s infinite; /* Fx 5+ */
+    -o-animation: cling 4s infinite; /* Opera 12+ */
+    animation: cling 4s infinite; /* IE 10+, Fx 29+ */
+    /* animation-delay: 1s; */
+}
+
+#plus:hover {
+    -webkit-animation: fontbulger 1s normal; /* Safari 4+ */
+    -moz-animation: fontbulger 1s normal; /* Fx 5+ */
+    -o-animation: fontbulger 1s normal; /* Opera 12+ */
+    animation: fontbulger 1s normal; /* IE 10+, Fx 29+ */
+}
+
+@keyframes infinite-spinning {
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(180deg);
+    }
+}
+
+@keyframes cling {
+    12.5% {
+        transform: rotate(35deg);
+    }
+    37.5% {
+        transform: rotate(-35deg);
+    }
+    62.5% {
+        transform: rotate(35deg);
+    }
+    87.5% {
+        transform: rotate(-35deg);
+    }
+}
+
+@keyframes fontbulger {
+    50% {
+        font-size: 1.25em;
+    }
+}
+
+.square-button:hover * {
+    color: #a6a6a6;
+}
+
+.icon {
+    font-size: 2em;
+    color: grey;
+}
