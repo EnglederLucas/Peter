@@ -37,10 +37,11 @@ const AddServiceModal = (props: AddServiceModalProp) => {
                         className="mr-1"
                         placeholder="Service Name"
                         aria-label="Service Name"
-                        onChange={name => {
-                            console.log(name);
-                            setName(name.target.textContent?.toString() ?? "");
-                        }}
+                        // onChange={name => {
+                        //     console.log(name);
+                        //     setName(name.target.textContent?.toString() setName(?? "");
+                        // }}
+                        onChange={e => setName(e.target.value)}
                     />
                     <DropdownButton
                         id="dropdown-basic-button"

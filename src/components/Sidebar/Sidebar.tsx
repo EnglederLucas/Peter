@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Sidebar.css";
 import { FaCog, FaPlusSquare, FaBell, FaBellSlash } from "react-icons/fa";
 import {
@@ -31,6 +31,10 @@ const Sidebar = (props: SidebarProps) => {
     const [notificationsEnabled, setNotificationsEnabled] = useState({
         value: true,
         icon: FaBell,
+    });
+
+    useEffect(() => {
+        ReactTooltip.rebuild();
     });
 
     const getActionButtons = (): IconButton[] => {
@@ -139,9 +143,10 @@ const Sidebar = (props: SidebarProps) => {
             <AddServiceModal
                 show={showAddServiceModal}
                 onHide={() => setShowAddServiceModal(false)}
-                addService={(service: ServiceAccount) =>
-                    props.addService(service)
-                }
+                addService={(service: ServiceAccount) => {
+                    props.addService(service);
+                    ReactTooltip.rebuild();
+                }}
             />
 
             <ReactTooltip effect="solid" />
