@@ -33,38 +33,42 @@ const Sidebar = (props: SidebarProps) => {
 		icon: FaBell,
 	});
 
-	const getActionButtons = (): IconButton[] => {
-		return [
-			{
-				icon: notificationsEnabled.icon,
-				action: () =>
-					setNotificationsEnabled({
-						value: !notificationsEnabled.value,
-						icon: !notificationsEnabled.value
-							? FaBell
-							: FaBellSlash,
-					}),
-				id: "bell",
-				tooltip: "Disable or Enable Notifications",
-			},
-			{
-				icon: FaPlusSquare,
-				action: () => {
-					setShowAddServiceModal(true);
-				},
-				id: "plus",
-				tooltip: "Add new Service",
-			},
-			{
-				icon: FaCog,
-				action: () => {
-					setShowOptionsModal(true);
-				},
-				id: "cog",
-				tooltip: "Options",
-			},
-		] as IconButton[];
-	};
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    });
+
+    const getActionButtons = (): IconButton[] => {
+        return [
+            {
+                icon: notificationsEnabled.icon,
+                action: () =>
+                    setNotificationsEnabled({
+                        value: !notificationsEnabled.value,
+                        icon: !notificationsEnabled.value
+                            ? FaBell
+                            : FaBellSlash,
+                    }),
+                id: "bell",
+                tooltip: "Disable or Enable Notifications",
+            },
+            {
+                icon: FaPlusSquare,
+                action: () => {
+                    setShowAddServiceModal(true);
+                },
+                id: "plus",
+                tooltip: "Add new Service",
+            },
+            {
+                icon: FaCog,
+                action: () => {
+                    setShowOptionsModal(true);
+                },
+                id: "cog",
+                tooltip: "Options",
+            },
+        ] as IconButton[];
+    };
 
 	const [currentlySelected, setCurrentlySelected] = useState(
 		props.myservices[0]
@@ -139,13 +143,15 @@ const Sidebar = (props: SidebarProps) => {
 				onHide={() => setShowOptionsModal(false)}
 			/>
 
-			<AddServiceModal
-				show={showAddServiceModal}
-				onHide={() => setShowAddServiceModal(false)}
-				addService={(service: ServiceAccount) =>
-					props.addService(service)
-				}
-			/>
+
+            <AddServiceModal
+                show={showAddServiceModal}
+                onHide={() => setShowAddServiceModal(false)}
+                addService={(service: ServiceAccount) => {
+                    props.addService(service);
+                    ReactTooltip.rebuild();
+                }}
+            />
 
 			<ReactTooltip effect="solid" />
 		</div>

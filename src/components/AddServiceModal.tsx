@@ -19,91 +19,61 @@ interface AddServiceModalProp {
 const AddServiceModal = (props: AddServiceModalProp) => {
 	const [service, setService] = useState((null as unknown) as ServiceType);
 	const [name, setName] = useState("");
-
-	return (
-		<Modal
-			{...props}
-			size="lg"
-			aria-labelledby="contained-modal-title-vcenter"
-			centered
-		>
-			<Modal.Header closeButton>
-				<Modal.Title id="contained-modal-title-vcenter">
-					Add Service
-				</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				<InputGroup className="mb-3">
-					<FormControl
-						className="mr-1"
-						placeholder="Service Name"
-						aria-label="Service Name"
-						onChange={(name) => {
-							console.log(name);
-							setName(name.target.textContent?.toString() ?? "");
-						}}
-					/>
-					<DropdownButton
-						id="dropdown-basic-button"
-						title="Type of Service"
-					>
-						{AvailableService.ALLSERVICES.map((service) => (
-							<Dropdown.Item
-								href="#/action-1"
-								onSelect={() => {
-									console.log(service.value);
-									setService(service.value);
-								}}
-							>
-								{service.toString()}
-							</Dropdown.Item>
-						))}
-					</DropdownButton>
-
-					{() => {
-						if (
-							service !== null &&
-							service.serviceName ===
-								AvailableService.SLACK.value.serviceName
-						) {
-							return (
-								<FormControl
-									className="mr-1"
-									placeholder="Service Name"
-									aria-label="Service Name"
-									onChange={(name) => {
-										console.log(name);
-										setService({
-											serviceName: service.serviceName,
-											icon: service.icon,
-											category: service.category,
-											url:
-												name.target.textContent?.toString() ??
-												service.url,
-										});
-									}}
-								/>
-							);
-						}
-					}}
-				</InputGroup>
-			</Modal.Body>
-			<Modal.Footer>
-				<Button onClick={props.onHide}>Close</Button>
-				<Button
-					variant="success"
-					onClick={() => {
-						props.onHide();
-						if (service !== undefined && service !== null) {
-							props.addService({ name: name, type: service });
-						}
-					}}
-				>
-					Add
-				</Button>
-			</Modal.Footer>
-		</Modal>
-	);
+  
+    return (
+        <Modal
+            {...props}
+            size="lg"
+            aria-labelledby="contained-modal-title-vcenter"
+            centered>
+            <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title-vcenter">
+                    Add Service
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <InputGroup className="mb-3">
+                    <FormControl
+                        className="mr-1"
+                        placeholder="Service Name"
+                        aria-label="Service Name"
+                        // onChange={name => {
+                        //     console.log(name);
+                        //     setName(name.target.textContent?.toString() setName(?? "");
+                        // }}
+                        onChange={e => setName(e.target.value)}
+                    />
+                    <DropdownButton
+                        id="dropdown-basic-button"
+                        title="Type of Service">
+                        {AvailableService.ALLSERVICES.map(service => (
+                            <Dropdown.Item
+                                href="#/action-1"
+                                onSelect={() => {
+                                    console.log(service.value);
+                                    setService(service.value);
+                                }}>
+                                {service.toString()}
+                            </Dropdown.Item>
+                        ))}
+                    </DropdownButton>
+                </InputGroup>{" "}
+            </Modal.Body>
+            <Modal.Footer>
+                <Button onClick={props.onHide}>Close</Button>
+                <Button
+                    variant="success"
+                    onClick={() => {
+                        props.onHide();
+                        if (service !== undefined && service !== null) {
+                            props.addService({ name: name, type: service });
+                        }
+                    }}>
+                    Add
+                </Button>
+            </Modal.Footer>
+        </Modal>
+    );
 };
 
 export default AddServiceModal;
