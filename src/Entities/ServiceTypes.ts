@@ -3,12 +3,12 @@ import { IconType } from "react-icons/lib";
 export interface ServiceType {
 	serviceName: string;
 	icon: IconType | undefined | string;
-	category: string | undefined;
+	category?: string;
 	url?: string;
 }
 
 export interface ServiceAccount {
-	id?: number;
+	id?: string;
 	name: string;
 	type: ServiceType;
 }

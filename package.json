@@ -54,7 +54,8 @@
 	"devDependencies": {
 		"@types/electron": "^1.6.10",
 		"electron": "^9.1.0",
-		"react-electron-web-view": "^2.0.1"
+		"react-electron-web-view": "^2.0.1",
+		"uuid-random": "^1.3.2"
 	},
 	"main": "public/electron.js",
 	"homepage": "./"
