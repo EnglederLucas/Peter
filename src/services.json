@@ -1,0 +1,121 @@
+[
+  {
+    "serviceName": "Gmail",
+    "url": "https://mail.google.com/mail/u/0/#inbox",
+    "icon": "gmail.svg",
+    "tags": ["Email"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "WhatsApp",
+    "url": "https://web.whatsapp.com/",
+    "icon": "whattsapp.svg",
+    "tags": ["Messenger"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Google Keep",
+    "url": "https://keep.google.com/",
+    "icon": "google-keep.svg",
+    "tags": ["Notes", "Creativity"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Trello",
+    "url": "https://trello.com/",
+    "icon": "trello.svg",
+    "tags": ["Notes", "Organization", "Business"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Slack",
+    "url": "https://slack.com/intl/en-at/",
+    "icon": "slack.svg",
+    "tags": ["Messenger", "Business"],
+    "groupBased": true
+  },
+  {
+    "serviceName": "Discord",
+    "url": "https://discord.com/new",
+    "icon": "discord.svg",
+    "tags": ["Messenger"],
+    "groupBased": true
+  },
+  {
+    "serviceName": "Instagram",
+    "url": "https://www.instagram.com/",
+    "icon": "instagram.svg",
+    "tags": ["Social Media"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Microsoft Teams",
+    "url": "https://www.microsoft.com/en/microsoft-365/microsoft-teams/group-chat-software",
+    "icon": "microsoft-teams.svg",
+    "tags": ["Messenger", "Business"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Skype",
+    "url": "https://www.skype.com/en/",
+    "icon": "skype.svg",
+    "tags": ["Messenger"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Telegram React",
+    "url": "https://evgeny-nadymov.github.io/telegram-react/",
+    "icon": "telegramm.svg",
+    "tags": "Messenger",
+    "groupBased": false
+  },
+  {
+    "serviceName": "Telegram",
+    "url": "https://web.telegram.org/#/login",
+    "icon": "telegramm.svg",
+    "tags": ["Messenger"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Facebook Messenger",
+    "url": "https://www.messenger.com/",
+    "icon": "facebook-messenger.svg",
+    "tags": ["Messenger"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Twitter",
+    "url": "https://twitter.com/?lang=en",
+    "icon": "twitter.svg",
+    "tags": ["Social Media"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Steam",
+    "url": "https://steamcommunity.com/chat/",
+    "icon": "steam.svg",
+    "tags": ["Gaming"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Linked In",
+    "url": "https://www.linkedin.com/messaging",
+    "icon": "linkedin.svg",
+    "tags": ["Social Media"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Github",
+    "url": "https://github.com/",
+    "icon": "github.svg",
+    "tags": ["Software Development"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "Google Hangouts",
+    "url": "https://hangouts.google.com/",
+    "icon": "google-hangouts.svg",
+    "tags": ["Messenger"],
+    "groupBased": false
+  }
+]
