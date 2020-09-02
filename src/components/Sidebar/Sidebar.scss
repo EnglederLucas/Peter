@@ -16,7 +16,11 @@
 }
 
 .service-buttons {
-  height: fit-content;
+  overflow: auto;
+}
+
+.service-buttons::-webkit-scrollbar {
+  display: none;
 }
 
 .button-border {

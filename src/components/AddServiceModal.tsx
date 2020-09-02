@@ -1,17 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import InputGroup from "react-bootstrap/InputGroup";
 import FormControl from "react-bootstrap/FormControl";
-import DropdownButton from "react-bootstrap/DropdownButton";
 
 import uuid from "uuid-random";
 
-import Dropdown from "react-bootstrap/Dropdown";
 import { getAllServices } from "./../AvailableServices";
-import { ServiceAccount, ServiceType } from "./../Entities/ServiceTypes";
-import Service from "./Service";
 import ServiceCarousel from "./Other Components/ServiceCarousel";
+import { ServiceType, ServiceAccount } from "../Entities/ServiceTypes";
 
 interface AddServiceModalProp {
   show: boolean;
