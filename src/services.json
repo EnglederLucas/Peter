@@ -117,5 +117,12 @@
     "icon": "google-hangouts.svg",
     "tags": ["Messenger"],
     "groupBased": false
+  },
+  {
+    "serviceName": "HackMD",
+    "url": "https://hackmd.io/login",
+    "icon": "hackmd.png",
+    "tags": ["Notes"],
+    "groupBased": false
   }
 ]

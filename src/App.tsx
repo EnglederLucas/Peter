@@ -22,7 +22,6 @@ function App() {
       JSON.parse(localStorage.getItem("services") || "")
     );
 
-    var i: number = 0;
     // localStorage.setItem("services", JSON.stringify(i++));
     localStorage.setItem("services", JSON.stringify(services));
 
