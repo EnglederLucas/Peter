@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import Service from "./components/Service";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { ServiceAccount } from "./Entities/ServiceTypes";
-import { getAllServices } from "./AvailableServices";
-import uuid from "uuid-random";
 
 function App() {
-  const [services, setServices] = useState<ServiceAccount[]>([]);
+  const [services, setServices] = useState<ServiceAccount[]>(
+    JSON.parse(localStorage.getItem("services") ?? "") ?? []
+  );
 
   const [currentService, setCurentServices] = useState<ServiceAccount | null>(
     null
@@ -17,13 +17,25 @@ function App() {
   };
 
   const addService = (service: ServiceAccount) => {
+    console.log(
+      "Local Storage Test",
+      JSON.parse(localStorage.getItem("services") || "")
+    );
+
+    var i: number = 0;
+    // localStorage.setItem("services", JSON.stringify(i++));
+    localStorage.setItem("services", JSON.stringify(services));
+
     console.log(service);
     setServices([...services, service]);
   };
 
   const removeService = (service: ServiceAccount) => {
+    console.log("Local Storage Test", localStorage.getItem("services"));
+
     console.log("App", service);
     setServices(services.filter((s) => s.id !== service.id));
+    localStorage.setItem("services", JSON.stringify(services));
   };
 
   return (

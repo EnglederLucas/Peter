@@ -52,15 +52,16 @@ import services from "./services.json";
 // 	}
 // }
 
-const myservices: ServiceType | undefined = undefined;
-
 console.log(services);
 
 export function getAllServices(): ServiceType[] {
-	const serviceTypes: ServiceType[] = services.map((ser) => ({
-		...ser,
-		icon: "./serviceicons/" + ser.icon,
-	} as ServiceType));
+  const serviceTypes: ServiceType[] = services.map(
+    (ser) =>
+      ({
+        ...ser,
+        icon: "./serviceicons/" + ser.icon,
+      } as ServiceType)
+  );
 
-	return serviceTypes;
+  return serviceTypes;
 }

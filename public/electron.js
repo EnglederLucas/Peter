@@ -11,7 +11,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 800,
-    webPreferences: { webviewTag: true },
+    webPreferences: { webviewTag: true, worldSafeExecuteJavaScript: true },
     // frame: false,
   });
   mainWindow.loadURL(
