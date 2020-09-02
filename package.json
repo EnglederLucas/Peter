@@ -18,7 +18,7 @@
     "react-contextmenu": "^2.14.0",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
-    "react-scripts": "3.4.1",
+    "react-scripts": "^3.4.3",
     "react-tooltip": "^4.2.7",
     "typescript": "^3.7.5",
     "wait-on": "^5.1.0"

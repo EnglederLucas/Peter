@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import Service from "./components/Service";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { ServiceAccount } from "./Entities/ServiceTypes";
-import { getAllServices } from "./AvailableServices";
-import uuid from "uuid-random";
+// import * as storage from "electron-json-storage";
 
 function App() {
-  const [services, setServices] = useState<ServiceAccount[]>([]);
+  const [services, setServices] = useState<ServiceAccount[]>(
+    JSON.parse(localStorage.getItem("services") ?? "") ?? []
+  );
 
   const [currentService, setCurentServices] = useState<ServiceAccount | null>(
     null
@@ -19,11 +20,17 @@ function App() {
   const addService = (service: ServiceAccount) => {
     console.log(service);
     setServices([...services, service]);
+    localStorage.setItem("services", JSON.stringify(services));
+    console.log(JSON.parse(localStorage.getItem("services") ?? "") ?? []);
   };
 
   const removeService = (service: ServiceAccount) => {
     console.log("App", service);
     setServices(services.filter((s) => s.id !== service.id));
+    //storage.set("services", services, function (error) {
+    //  if (error) throw error;
+    //});
+    localStorage.setItem("services", JSON.stringify(services));
   };
 
   return (
