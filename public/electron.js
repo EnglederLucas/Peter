@@ -4,8 +4,7 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
 let mainWindow;
-
-// const customTitlebar = require("custom-electron-titlebar");
+require("dotenv").config(); // const customTitlebar = require("custom-electron-titlebar");
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -16,7 +15,7 @@ function createWindow() {
   });
   mainWindow.loadURL(
     isDev
-      ? "http://localhost:3000"
+      ? `http://localhost:${process.env.PORT}`
       : `file://${path.join(__dirname, "../build/index.html")}`
   );
   mainWindow.on("closed", () => (mainWindow = null));
@@ -26,7 +25,7 @@ function createWindow() {
   // });
 
   mainWindow.removeMenu();
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 }
 app.on("ready", createWindow);
 app.on("window-all-closed", () => {

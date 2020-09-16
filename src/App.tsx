@@ -1,44 +1,65 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Service from "./components/Service";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { ServiceAccount } from "./Entities/ServiceTypes";
 
 function App() {
-  const [services, setServices] = useState<ServiceAccount[]>(
-    JSON.parse(localStorage.getItem("services") ?? "") ?? []
-  );
+  const [services, setServices] = useState<ServiceAccount[]>(getServicesLS());
 
   const [currentService, setCurentServices] = useState<ServiceAccount | null>(
     null
   );
-
   const selectService = (service: ServiceAccount) => {
     setCurentServices(service);
   };
 
+  function getServicesLS() {
+    console.log("GetLocalStorage", localStorage.getItem("services"));
+
+    try {
+      return JSON.parse(localStorage.getItem("services") ?? "") ?? [];
+    } catch (error) {
+      console.log(error);
+    }
+
+    return [];
+  }
+
+  function setServicesLS(services: ServiceAccount[]) {
+    console.log("SetLocalStorage", localStorage.getItem("services"));
+
+    try {
+      localStorage.setItem("services", JSON.stringify(services));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("services")) {
+      setServicesLS([]);
+    }
+
+    // console.log("salskdj", localStorage.getItem("services"));
+  }, []);
+
   const addService = (service: ServiceAccount) => {
-    console.log(
-      "Local Storage Test",
-      JSON.parse(localStorage.getItem("services") || "")
-    );
-
+    // console.log("Local Storage Test", getServicesLS());
     // localStorage.setItem("services", JSON.stringify(i++));
-    localStorage.setItem("services", JSON.stringify(services));
-
-    console.log(service);
+    setServicesLS([...services, service]);
     setServices([...services, service]);
   };
 
   const removeService = (service: ServiceAccount) => {
-    console.log("Local Storage Test", localStorage.getItem("services"));
-
+    // console.log("Local Storage Test", localStorage.getItem("services"));
     console.log("App", service);
     setServices(services.filter((s) => s.id !== service.id));
-    localStorage.setItem("services", JSON.stringify(services));
+    setServicesLS(services);
   };
 
   return (
     <div className="App">
+      {/* <h3>Joe</h3> */}
       <Sidebar
         myservices={services}
         selectService={selectService}
