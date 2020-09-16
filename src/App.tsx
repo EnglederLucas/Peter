@@ -6,11 +6,11 @@ import { ServiceAccount } from "./Entities/ServiceTypes";
 function App() {
   const [services, setServices] = useState<ServiceAccount[]>(getServicesLS());
 
-  const [currentService, setCurentServices] = useState<ServiceAccount | null>(
+  const [currentService, setCurrentServices] = useState<ServiceAccount | null>(
     null
   );
   const selectService = (service: ServiceAccount) => {
-    setCurentServices(service);
+    setCurrentServices(service);
   };
 
   function getServicesLS() {
@@ -54,7 +54,7 @@ function App() {
     // console.log("Local Storage Test", localStorage.getItem("services"));
     console.log("App", service);
     setServices(services.filter((s) => s.id !== service.id));
-    setServicesLS(services);
+    setServicesLS(services.filter((s) => s.id !== service.id));
   };
 
   return (
