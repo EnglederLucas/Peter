@@ -1,8 +1,10 @@
+// const fs = require("fs");
 const electron = require("electron");
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const isDev = require("electron-is-dev");
+require("electron-reload");
 let mainWindow;
 require("dotenv").config(); // const customTitlebar = require("custom-electron-titlebar");
 
@@ -10,7 +12,12 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1024,
     height: 800,
-    webPreferences: { webviewTag: true, worldSafeExecuteJavaScript: true },
+    webPreferences: {
+      webviewTag: true,
+      // worldSafeExecuteJavaScript: true,
+      enableRemoteModule: true,
+      // nodeIntegration: true,
+    },
     // frame: false,
   });
   mainWindow.loadURL(
