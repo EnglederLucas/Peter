@@ -13,7 +13,7 @@ import { ServiceType, ServiceAccount } from "../Entities/ServiceTypes";
 interface AddServiceModalProp {
   show: boolean;
   onHide: any;
-  addService: (s: ServiceAccount) => void;
+  addService: (service: ServiceAccount) => void;
 }
 
 const AddServiceModal = (props: AddServiceModalProp) => {

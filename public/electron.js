@@ -7,6 +7,9 @@ const isDev = require("electron-is-dev");
 require("electron-reload");
 let mainWindow;
 require("dotenv").config(); // const customTitlebar = require("custom-electron-titlebar");
+const storage = require("electron-json-storage");
+
+const ipc = electron.ipcMain;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -14,9 +17,10 @@ function createWindow() {
     height: 800,
     webPreferences: {
       webviewTag: true,
-      // worldSafeExecuteJavaScript: true,
+      worldSafeExecuteJavaScript: true,
       enableRemoteModule: true,
-      // nodeIntegration: true,
+      nodeIntegration: true,
+      // preload: __dirname + "/preload.js",
     },
     // frame: false,
   });
@@ -32,7 +36,7 @@ function createWindow() {
   // });
 
   mainWindow.removeMenu();
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 }
 app.on("ready", createWindow);
 app.on("window-all-closed", () => {
@@ -44,4 +48,21 @@ app.on("activate", () => {
   if (mainWindow === null) {
     createWindow();
   }
+});
+
+ipc.on("save-new-service", function (event, arg) {
+  storage.set("services", [arg], function (error) {
+    if (error) throw error;
+  });
+
+  mainWindow.webContents.send("all-services", arg);
+});
+
+ipc.on("get-all-services", function (event, arg) {
+  // win.webContents.send('targetPriceVal', arg)
+  storage.get("services", (error, data) => {
+    if (error) throw error;
+
+    mainWindow.webContents.send("all-services", data[0]);
+  });
 });
