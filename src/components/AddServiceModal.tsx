@@ -13,7 +13,7 @@ import { ServiceType, ServiceAccount } from "../Entities/ServiceTypes";
 interface AddServiceModalProp {
   show: boolean;
   onHide: any;
-  addService: (s: ServiceAccount) => void;
+  addService: (service: ServiceAccount) => void;
 }
 
 const AddServiceModal = (props: AddServiceModalProp) => {
@@ -22,25 +22,27 @@ const AddServiceModal = (props: AddServiceModalProp) => {
 
   const getSlackCustomURL = () => {
     return (
-      <InputGroup className="mt-10">
-        <InputGroup.Prepend>
-          <InputGroup.Text id="basic-addon2">https://</InputGroup.Text>
-        </InputGroup.Prepend>
-        <FormControl
-          placeholder="Custom URL"
-          aria-label="Custom URL"
-          onChange={(name) => {
-            console.log(name);
-            setService({
-              url: `https://"${name.target.value}.slack.com` ?? service?.url,
-              ...service,
-            } as ServiceType);
-          }}
-        />
-        <InputGroup.Append>
-          <InputGroup.Text id="basic-addon2">.slack.com</InputGroup.Text>
-        </InputGroup.Append>
-      </InputGroup>
+      <div style={{ marginTop: "20px" }}>
+        <InputGroup className="mt-20">
+          <InputGroup.Prepend>
+            <InputGroup.Text id="basic-addon2">https://</InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl
+            placeholder="Custom URL"
+            aria-label="Custom URL"
+            onChange={(name) => {
+              console.log(name);
+              setService({
+                url: `https://"${name.target.value}.slack.com` ?? service?.url,
+                ...service,
+              } as ServiceType);
+            }}
+          />
+          <InputGroup.Append>
+            <InputGroup.Text id="basic-addon2">.slack.com</InputGroup.Text>
+          </InputGroup.Append>
+        </InputGroup>
+      </div>
     );
   };
 
@@ -65,20 +67,6 @@ const AddServiceModal = (props: AddServiceModalProp) => {
             defaultValue={service?.serviceName ?? ""}
             onChange={(e) => setName(e.target.value)}
           />
-          {/* <DropdownButton id="dropdown-basic-button" title="Type of Service">
-            {getAllServices().map((service: ServiceType) => (
-              <Dropdown.Item
-                href="#/action-1"
-                key={service.serviceName}
-                onSelect={() => {
-                  console.log(service);
-                  setService(service);
-                }}
-              >
-                {service.serviceName}
-              </Dropdown.Item>
-            ))}
-          </DropdownButton> */}
         </InputGroup>
 
         <ServiceCarousel

@@ -1,40 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Service from "./components/Service";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { ServiceAccount } from "./Entities/ServiceTypes";
+import isElectron from "is-electron";
+import { IpcRenderer } from "electron";
+
+declare global {
+  interface Window {
+    require: (
+      module: "electron"
+    ) => {
+      ipcRenderer: IpcRenderer;
+    };
+  }
+}
+
+const { ipcRenderer } = window.require("electron");
 
 function App() {
-  const [services, setServices] = useState<ServiceAccount[]>(
-    JSON.parse(localStorage.getItem("services") ?? "") ?? []
-  );
+  const [services, setServices] = useState<ServiceAccount[]>([]);
 
-  const [currentService, setCurentServices] = useState<ServiceAccount | null>(
+  const [currentService, setCurrentServices] = useState<ServiceAccount | null>(
     null
   );
-
   const selectService = (service: ServiceAccount) => {
-    setCurentServices(service);
+    setCurrentServices(service);
   };
 
+  function setServicesLS(services: ServiceAccount[]) {
+    try {
+      ipcRenderer.send("save-new-service", services);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (isElectron()) {
+      console.log(ipcRenderer);
+      ipcRenderer.on("all-services", (event: any, arg: any) => {
+        console.log("AllServices", arg);
+        setServices(arg);
+      });
+      ipcRenderer.send("get-all-services");
+    }
+  }, []);
+
   const addService = (service: ServiceAccount) => {
-    console.log(
-      "Local Storage Test",
-      JSON.parse(localStorage.getItem("services") || "")
-    );
-
-    // localStorage.setItem("services", JSON.stringify(i++));
-    localStorage.setItem("services", JSON.stringify(services));
-
-    console.log(service);
+    setServicesLS([...services, service]);
     setServices([...services, service]);
   };
 
   const removeService = (service: ServiceAccount) => {
-    console.log("Local Storage Test", localStorage.getItem("services"));
-
     console.log("App", service);
     setServices(services.filter((s) => s.id !== service.id));
-    localStorage.setItem("services", JSON.stringify(services));
+    setServicesLS(services.filter((s) => s.id !== service.id));
   };
 
   return (

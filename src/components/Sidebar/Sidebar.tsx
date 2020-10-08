@@ -24,7 +24,11 @@ interface IconButton {
 }
 
 const Sidebar = (props: SidebarProps) => {
-  const [showAddServiceModal, setShowAddServiceModal] = useState(true);
+  const [showAddServiceModal, setShowAddServiceModal] = useState(
+    props.myservices === undefined ||
+      props.myservices === null ||
+      props.myservices?.length === 0
+  ); //When services empty, show AddServiceModal
   const [showOptionsModal, setShowOptionsModal] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState({
     value: true,
