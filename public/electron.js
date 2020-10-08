@@ -17,7 +17,7 @@ function createWindow() {
     height: 800,
     webPreferences: {
       webviewTag: true,
-      worldSafeExecuteJavaScript: true,
+      // worldSafeExecuteJavaScript: true,
       enableRemoteModule: true,
       nodeIntegration: true,
       // preload: __dirname + "/preload.js",
@@ -36,7 +36,11 @@ function createWindow() {
   // });
 
   mainWindow.removeMenu();
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
 }
 app.on("ready", createWindow);
 app.on("window-all-closed", () => {
