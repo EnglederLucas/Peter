@@ -20,6 +20,20 @@ const AddServiceModal = (props: AddServiceModalProp) => {
   const [service, setService] = useState<ServiceType | null>(null);
   const [name, setName] = useState("");
 
+  const handleCustomInput = (e: any) => {
+    const { name, value } = e.target;
+
+    console.log(name);
+    e.persist();
+    setService({
+      ...service,
+
+      url: value ?? service?.url,
+    } as ServiceType);
+
+    console.log("Service", service);
+  };
+
   const getSlackCustomURL = () => {
     return (
       <div style={{ marginTop: "20px" }}>
@@ -33,10 +47,33 @@ const AddServiceModal = (props: AddServiceModalProp) => {
             onChange={(name) => {
               console.log(name);
               setService({
-                url: `https://"${name.target.value}.slack.com` ?? service?.url,
                 ...service,
+
+                url: `https://${name.target.value}.slack.com` ?? service?.url,
               } as ServiceType);
+
+              console.log("Service", service);
             }}
+          />
+          <InputGroup.Append>
+            <InputGroup.Text id="basic-addon2">.slack.com</InputGroup.Text>
+          </InputGroup.Append>
+        </InputGroup>
+      </div>
+    );
+  };
+
+  const getCustomURL = () => {
+    return (
+      <div style={{ marginTop: "20px" }}>
+        <InputGroup className="mt-20">
+          <InputGroup.Prepend>
+            <InputGroup.Text id="basic-addon2">https://</InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl
+            placeholder="Custom URL"
+            aria-label="Custom URL"
+            onChange={(e) => handleCustomInput(e)}
           />
           <InputGroup.Append>
             <InputGroup.Text id="basic-addon2">.slack.com</InputGroup.Text>
@@ -77,6 +114,8 @@ const AddServiceModal = (props: AddServiceModalProp) => {
         {service !== null &&
           service.serviceName === "Slack" &&
           getSlackCustomURL()}
+
+        {/* {service !== null && service.customUrl && getCustomURL()} */}
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Close</Button>

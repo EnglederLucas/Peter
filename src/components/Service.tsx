@@ -1,9 +1,9 @@
 import React, { Component } from "react";
+import { ServiceAccount } from "../Entities/ServiceTypes";
 const Webview = require("react-electron-web-view");
 
 type ServiceProps = {
-  url: string;
-  name: string;
+  service: ServiceAccount;
   display: boolean;
 };
 
@@ -20,9 +20,10 @@ class Service extends Component<ServiceProps, ServiceState> {
             height: "100%",
             border: "none",
           }}
-          src={this.props.url}
+          src={this.props.service.type.url}
           useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.128 Safari/537.36"
-          partition="persist:service-c1e18515-1c36-46c9-bf6f-c2ae99cd28be"
+          partition={`persist:service-${this.props.service.id}`}
+          allowpopups
           //   autosize=
         ></Webview>
       </>

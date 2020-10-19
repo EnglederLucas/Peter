@@ -37,9 +37,8 @@ function App() {
 
   useEffect(() => {
     if (isElectron()) {
-      console.log(ipcRenderer);
+      console.info(ipcRenderer);
       ipcRenderer.on("all-services", (event: any, arg: any) => {
-        console.log("AllServices", arg);
         setServices(arg);
       });
       ipcRenderer.send("get-all-services");
@@ -47,14 +46,41 @@ function App() {
   }, []);
 
   const addService = (service: ServiceAccount) => {
+    service = { orderIndex: services.length, ...service };
+
     setServicesLS([...services, service]);
     setServices([...services, service]);
   };
 
   const removeService = (service: ServiceAccount) => {
-    console.log("App", service);
+    console.log("Remove");
+    console.info("Removing Service", service);
     setServices(services.filter((s) => s.id !== service.id));
     setServicesLS(services.filter((s) => s.id !== service.id));
+  };
+
+  const reorderService = (service: ServiceAccount, newIndex: number) => {
+    console.log("Service and Destination", service, newIndex);
+    let servicesCopy = [...services];
+    const insert = (arr: any[], index: number, newItem: ServiceAccount) => [
+      ...arr.slice(0, index),
+      newItem,
+      ...arr.slice(index),
+    ];
+
+    servicesCopy = servicesCopy
+      .sort((a, b) => (a.orderIndex ?? -1) - (b.orderIndex ?? -1))
+      .map((s, i) => ({ ...s, orderIndex: i }));
+
+    servicesCopy = servicesCopy.filter((s) => s.id !== service.id);
+    servicesCopy = insert(servicesCopy, newIndex, service);
+
+    servicesCopy = servicesCopy
+      .map((s, i) => ({ ...s, orderIndex: i }))
+      .sort((a, b) => (a.orderIndex ?? -1) - (b.orderIndex ?? -1));
+
+    setServices(servicesCopy);
+    setServicesLS(servicesCopy);
   };
 
   return (
@@ -64,6 +90,9 @@ function App() {
         selectService={selectService}
         addService={(service: ServiceAccount) => addService(service)}
         removeService={(service: ServiceAccount) => removeService(service)}
+        reorderService={(service: ServiceAccount, newIndex: number) =>
+          reorderService(service, newIndex)
+        }
       ></Sidebar>
       <div
         className="content"
@@ -74,12 +103,10 @@ function App() {
         }}
       >
         {services.map((serv) => {
-          console.log(serv);
           return (
             <Service
               display={serv.id === currentService?.id}
-              url={serv.type.url ?? ""}
-              name={serv.name}
+              service={serv}
               key={serv.id}
             ></Service>
           );

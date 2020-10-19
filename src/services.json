@@ -130,6 +130,7 @@
     "url": "https://webuntis.com/",
     "icon": "webuntis.png",
     "tags": ["School", "Business"],
-    "groupBased": true
+    "groupBased": true,
+    "customUrl": true
   }
 ]

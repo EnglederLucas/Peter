@@ -26,7 +26,6 @@ export default function ServiceCarousel({
           onClick={() => {
             setSelected(s);
             onSelect(s);
-            console.log(s);
           }}
         >
           <img
