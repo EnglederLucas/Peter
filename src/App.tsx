@@ -1,36 +1,90 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Service from "./components/Service";
 import Sidebar from "./components/Sidebar/Sidebar";
 import { ServiceAccount } from "./Entities/ServiceTypes";
-// import * as storage from "electron-json-storage";
+import isElectron from "is-electron";
+import { IpcRenderer } from "electron";
+
+declare global {
+  interface Window {
+    require: (
+      module: "electron"
+    ) => {
+      ipcRenderer: IpcRenderer;
+    };
+  }
+}
+
+const { ipcRenderer } = window.require("electron");
 
 function App() {
   const [services, setServices] = useState<ServiceAccount[]>(
     JSON.parse(localStorage.getItem("services") ?? "") ?? []
   );
 
-  const [currentService, setCurentServices] = useState<ServiceAccount | null>(
+  const [currentService, setCurrentServices] = useState<ServiceAccount | null>(
     null
   );
-
   const selectService = (service: ServiceAccount) => {
-    setCurentServices(service);
+    setCurrentServices(service);
   };
 
+  function setServicesLS(services: ServiceAccount[]) {
+    try {
+      ipcRenderer.send("save-new-service", services);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (isElectron()) {
+      console.info(ipcRenderer);
+      ipcRenderer.on("all-services", (event: any, arg: any) => {
+        setServices(arg);
+      });
+      ipcRenderer.send("get-all-services");
+    }
+  }, []);
+
   const addService = (service: ServiceAccount) => {
-    console.log(service);
+    service = { orderIndex: services.length, ...service };
+
+    setServicesLS([...services, service]);
     setServices([...services, service]);
     localStorage.setItem("services", JSON.stringify(services));
     console.log(JSON.parse(localStorage.getItem("services") ?? "") ?? []);
   };
 
   const removeService = (service: ServiceAccount) => {
-    console.log("App", service);
+    console.log("Remove");
+    console.info("Removing Service", service);
     setServices(services.filter((s) => s.id !== service.id));
-    //storage.set("services", services, function (error) {
-    //  if (error) throw error;
-    //});
-    localStorage.setItem("services", JSON.stringify(services));
+    setServicesLS(services.filter((s) => s.id !== service.id));
+  };
+
+  const reorderService = (service: ServiceAccount, newIndex: number) => {
+    console.log("Service and Destination", service, newIndex);
+    let servicesCopy = [...services];
+    const insert = (arr: any[], index: number, newItem: ServiceAccount) => [
+      ...arr.slice(0, index),
+      newItem,
+      ...arr.slice(index),
+    ];
+
+    servicesCopy = servicesCopy
+      .sort((a, b) => (a.orderIndex ?? -1) - (b.orderIndex ?? -1))
+      .map((s, i) => ({ ...s, orderIndex: i }));
+
+    servicesCopy = servicesCopy.filter((s) => s.id !== service.id);
+    servicesCopy = insert(servicesCopy, newIndex, service);
+
+    servicesCopy = servicesCopy
+      .map((s, i) => ({ ...s, orderIndex: i }))
+      .sort((a, b) => (a.orderIndex ?? -1) - (b.orderIndex ?? -1));
+
+    setServices(servicesCopy);
+    setServicesLS(servicesCopy);
   };
 
   return (
@@ -40,6 +94,9 @@ function App() {
         selectService={selectService}
         addService={(service: ServiceAccount) => addService(service)}
         removeService={(service: ServiceAccount) => removeService(service)}
+        reorderService={(service: ServiceAccount, newIndex: number) =>
+          reorderService(service, newIndex)
+        }
       ></Sidebar>
       <div
         className="content"
@@ -50,12 +107,10 @@ function App() {
         }}
       >
         {services.map((serv) => {
-          console.log(serv);
           return (
             <Service
               display={serv.id === currentService?.id}
-              url={serv.type.url ?? ""}
-              name={serv.name}
+              service={serv}
               key={serv.id}
             ></Service>
           );

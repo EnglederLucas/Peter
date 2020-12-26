@@ -1,5 +1,5 @@
-import React, { CSSProperties, useState, useEffect } from "react";
-import { ServiceAccount, ServiceType } from "./../../Entities/ServiceTypes";
+import React, { CSSProperties, useState } from "react";
+import { ServiceType } from "./../../Entities/ServiceTypes";
 import ReactTooltip from "react-tooltip";
 import "./../../default-styles.scss";
 
@@ -26,7 +26,6 @@ export default function ServiceCarousel({
           onClick={() => {
             setSelected(s);
             onSelect(s);
-            console.log(s);
           }}
         >
           <img

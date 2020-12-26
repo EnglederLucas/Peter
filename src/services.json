@@ -117,5 +117,20 @@
     "icon": "google-hangouts.svg",
     "tags": ["Messenger"],
     "groupBased": false
+  },
+  {
+    "serviceName": "HackMD",
+    "url": "https://hackmd.io/login",
+    "icon": "hackmd.png",
+    "tags": ["Notes"],
+    "groupBased": false
+  },
+  {
+    "serviceName": "WebUntis",
+    "url": "https://webuntis.com/",
+    "icon": "webuntis.png",
+    "tags": ["School", "Business"],
+    "groupBased": true,
+    "customUrl": true
   }
 ]

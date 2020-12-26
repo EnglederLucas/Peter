@@ -50,6 +50,8 @@
   text-align: center;
   justify-content: center;
   flex-direction: column;
+  // background-color: $light;
+  cursor: default;
 }
 
 .square-button > p {
@@ -83,10 +85,10 @@
 }
 
 #plus:hover {
-  -webkit-animation: fontbulger 1s normal; /* Safari 4+ */
-  -moz-animation: fontbulger 1s normal; /* Fx 5+ */
-  -o-animation: fontbulger 1s normal; /* Opera 12+ */
-  animation: fontbulger 1s normal; /* IE 10+, Fx 29+ */
+  animation: bounce 0.5s infinite alternate;
+  -webkit-animation: bounce 0.5s infinite alternate;
+  -moz-animation: bounce 0.5s infinite alternate;
+  -o-animation: bounce 0.5s infinite alternate;
 }
 
 @keyframes infinite-spinning {
@@ -114,9 +116,12 @@
   }
 }
 
-@keyframes fontbulger {
-  50% {
-    font-size: 1.25em;
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-10px);
   }
 }
 
