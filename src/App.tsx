@@ -12,19 +12,20 @@ declare global {
     ) => {
       ipcRenderer: IpcRenderer;
     };
+    ipcRenderer: IpcRenderer;
   }
 }
 
-const { ipcRenderer } = window.require("electron");
+// const { ipcRenderer } = require("electron");
+const ipcRenderer = window.ipcRenderer;
 
-function App() {
-  const [services, setServices] = useState<ServiceAccount[]>(
-    JSON.parse(localStorage.getItem("services") ?? "") ?? []
-  );
+function App(): JSX.Element {
+  const [services, setServices] = useState<ServiceAccount[]>([]);
 
   const [currentService, setCurrentServices] = useState<ServiceAccount | null>(
     null
   );
+
   const selectService = (service: ServiceAccount) => {
     setCurrentServices(service);
   };
@@ -49,11 +50,9 @@ function App() {
 
   const addService = (service: ServiceAccount) => {
     service = { orderIndex: services.length, ...service };
-
     setServicesLS([...services, service]);
     setServices([...services, service]);
     localStorage.setItem("services", JSON.stringify(services));
-    console.log(JSON.parse(localStorage.getItem("services") ?? "") ?? []);
   };
 
   const removeService = (service: ServiceAccount) => {
@@ -82,6 +81,8 @@ function App() {
     servicesCopy = servicesCopy
       .map((s, i) => ({ ...s, orderIndex: i }))
       .sort((a, b) => (a.orderIndex ?? -1) - (b.orderIndex ?? -1));
+
+    console.log("servicesCopy", servicesCopy);
 
     setServices(servicesCopy);
     setServicesLS(servicesCopy);

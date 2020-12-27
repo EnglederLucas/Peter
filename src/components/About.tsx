@@ -30,15 +30,23 @@ export default function About() {
         <a href="https://www.flaticon.com/" title="Flaticon">
           www.flaticon.com
         </a>
-        <a target="_blank" href="https://icons8.de/icons/set/google-keep">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://icons8.de/icons/set/google-keep"
+        >
           Google Keep
         </a>
         ,{" "}
-        <a target="_blank" href="https://icons8.de/icons/set/discord-new-logo">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://icons8.de/icons/set/discord-new-logo"
+        >
           Neues Logo von Discord
         </a>{" "}
         und andere Symbole von{" "}
-        <a target="_blank" href="https://icons8.de">
+        <a target="_blank" rel="noopener noreferrer" href="https://icons8.de">
           Icons8
         </a>
       </div>

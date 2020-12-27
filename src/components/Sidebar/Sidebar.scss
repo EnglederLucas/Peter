@@ -89,6 +89,8 @@
   -webkit-animation: bounce 0.5s infinite alternate;
   -moz-animation: bounce 0.5s infinite alternate;
   -o-animation: bounce 0.5s infinite alternate;
+
+  animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 @keyframes infinite-spinning {
