@@ -19,7 +19,7 @@ function createWindow() {
       webviewTag: true,
       // worldSafeExecuteJavaScript: true,
       enableRemoteModule: true,
-      nodeIntegration: true,
+      contextIsolation: false,
       // preload: __dirname + "/preload.js",
     },
     // frame: false,
