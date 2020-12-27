@@ -17,7 +17,7 @@ function createWindow() {
     height: 800,
     webPreferences: {
       webviewTag: true,
-      // worldSafeExecuteJavaScript: true,
+      worldSafeExecuteJavaScript: true,
       enableRemoteModule: true,
       nodeIntegration: true,
       // preload: __dirname + "/preload.js",
