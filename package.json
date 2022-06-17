@@ -70,7 +70,7 @@
     "@types/react-beautiful-dnd": "^13.0.0",
     "@types/react-bootstrap": "^1.0.1",
     "@types/react-dom": "^16.9.8",
-    "electron": "^9.1.0",
+    "electron": "^15.5.5",
     "electron-builder": "^22.7.0",
     "nodemon": "^2.0.4",
     "react-electron-web-view": "^2.0.1",
